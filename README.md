@@ -10,7 +10,7 @@ Welcome to Paddle-RLBooks which is a reinforcement learning code study guide bas
 - [policy_gradient](./policy_gradient)
 - [actor_critic](./actor_critic)
 
-## Relate to
+## References
 Github : [cuhkrlcourse](https://github.com/cuhkrlcourse)
 
 ## Contact us
