@@ -10,7 +10,7 @@ Richly DQN code based on pure PaddlePaddle.
 - [Nstep-DQN](./nstep_dqn)
 - [Double-DQN](./double_dqn)
 - [Dueling-DQN](./dueling_dqn)
-- [Noisy-DQN]](./dqn_noisy_networks)
+- [Noisy-DQN](./dqn_noisy_networks)
 - [C51](./categorical_dqn(C51))
 
 ## References
