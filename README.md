@@ -3,15 +3,13 @@
 Welcome to Paddle-RLBooks which is a reinforcement learning code study guide based on pure PaddlePaddle.
 
 ## Codes
-- [policy_iteration](./policy_iteration)
-- [value_iteration](./value_iteration)
-- [sarsa](./sarsa)
-- [qlearning](./qlearning)
-- [policy_gradient](./policy_gradient)
-- [actor_critic](./actor_critic)
-
-## References
-Github : [cuhkrlcourse](https://github.com/cuhkrlcourse)
+- [Policy Iteration](./policy_iteration)
+- [Value Iteration](./value_iteration)
+- [Sarsa](./sarsa)
+- [Q-learning](./qlearning)
+- [DQN]](./dqn)
+- [Policy Gradient](./policy_gradient)
+- [Actor-Critic](./actor_critic)
 
 ## Contact us
 Email : [agentmaker@163.com]()
