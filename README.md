@@ -10,7 +10,7 @@ Welcome to Paddle-RLBooks which is a reinforcement learning code study guide bas
 - [Value Iteration](./value_iteration)
 - [Sarsa](./sarsa)
 - [Q-learning](./qlearning)
-- [DQN]](./dqn)
+- [DQN](./dqn)
 - [Policy Gradient](./policy_gradient)
 - [Actor-Critic](./actor_critic)
 
