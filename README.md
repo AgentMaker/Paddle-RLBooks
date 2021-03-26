@@ -3,7 +3,7 @@
 Welcome to Paddle-RLBooks which is a reinforcement learning code study guide based on pure PaddlePaddle.
 
 ## Show
-![image](https://gitee.com/agentmaker-manager/Paddle-RLBooks/blob/main/material/FlappyBird.gif)
+![](./material/FlappyBird.gif)
 
 ## Codes
 - [Policy Iteration](./policy_iteration)

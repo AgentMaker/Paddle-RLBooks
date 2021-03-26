@@ -2,6 +2,9 @@
 
 Richly DQN code based on pure PaddlePaddle.
 
+## Show
+![](../material/FlappyBird.gif)
+
 ## Codes
 - [DQN](./dqn)
 - [Nstep-DQN](./nstep_dqn)
