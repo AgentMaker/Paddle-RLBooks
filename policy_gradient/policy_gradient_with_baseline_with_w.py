@@ -60,7 +60,7 @@ def finish_episode():
         advantage = R - value
 
         policy_loss.append(-log_prob * advantage)
-        value_loss.append(F.smooth_l1_loss(value.squeeze(1), R))
+        value_loss.append(F.smooth_l1_loss(value.reshape([-1]), R.reshape([-1])))
 
     optimizer.clear_grad()
     policy_loss = paddle.concat(policy_loss).sum()
