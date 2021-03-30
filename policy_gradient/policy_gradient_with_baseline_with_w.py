@@ -19,24 +19,26 @@ paddle.seed(1)
 class Policy(nn.Layer):
     def __init__(self):
         super(Policy, self).__init__()
-        self.fc1 = nn.Linear(4, 128)
-        self.fc2 = nn.Linear(128, 2)
+        self.fc = nn.Linear(4, 128)
+        self.policy = nn.Linear(128, 2)
+        self.value = nn.Linear(128, 1)
 
         self.saved_log_probs = []
         self.rewards = []
 
     def forward(self, inputs):
-        x = F.relu(F.dropout(self.fc1(inputs), 0.6))
-        x = self.fc2(x)
+        x = F.relu(F.dropout(self.fc(inputs), 0.6))
+        policy = self.policy(x)
+        value = self.value(x)
 
-        return F.softmax(x, -1)
+        return F.softmax(policy, -1), value
 
     def select_action(self, inputs):
         x = paddle.to_tensor(inputs).astype('float32').unsqueeze(0)
-        probs = self.forward(x)
+        probs, state_value = self.forward(x)
         m = Categorical(probs)
         action = m.sample([1])
-        self.saved_log_probs.append(m.log_prob(action))
+        self.saved_log_probs.append((m.log_prob(action), state_value))
 
         return action
 
@@ -47,16 +49,25 @@ eps = np.finfo(np.float32).eps.item()
 def finish_episode():
     R = 0
     policy_loss = []
+    value_loss = []
     returns = []
     for r in policy.rewards[::-1]:
         R = r + gamma * R
         returns.insert(0, R)
     returns = paddle.to_tensor(returns)
-    for log_prob, R in zip(policy.saved_log_probs, returns):
-        policy_loss.append(-log_prob * R)
+    returns = (returns - returns.mean()) / (returns.std() + eps)
+    for (log_prob, value), R in zip(policy.saved_log_probs, returns):
+        advantage = R - value
+
+        policy_loss.append(-log_prob * advantage)
+        value_loss.append(F.smooth_l1_loss(value.squeeze(1), R))
+
     optimizer.clear_grad()
     policy_loss = paddle.concat(policy_loss).sum()
-    policy_loss.backward()
+    value_loss = paddle.concat(value_loss).sum()
+    loss = policy_loss + value_loss
+
+    loss.backward()
     optimizer.step()
     del policy.rewards[:]
     del policy.saved_log_probs[:]
