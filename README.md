@@ -3,18 +3,28 @@
 Welcome to Paddle-RLBooks which is a reinforcement learning code study guide based on pure PaddlePaddle.
 
 ## Show
-![](./material/FlappyBird.gif)
+![](./material/FlappyBird.jpg)
 
 ## Codes
-- [Policy Iteration](./policy_iteration)
-- [Value Iteration](./value_iteration)
-- [Sarsa](./sarsa)
-- [Q-learning](./qlearning)
-- [DQN](./dqn)
-- [Policy Gradient](./policy_gradient)
-- [Actor-Critic](./actor_critic)
-- [DDPG](./ddpg)
-- [TD3](./td3)
+- [x] [Policy Iteration](./policy_iteration)
+- [x] [Value Iteration](./value_iteration)
+- [x] [Sarsa](./sarsa)
+- [x] [Q-learning](./qlearning)
+- [x] [DQN](./dqn)
+- [x] [Policy Gradient](./policy_gradient)
+- [x] [Actor-Critic](./actor_critic)
+- [x] [DDPG](./ddpg)
+- [x] [TD3](./td3)
+- [x] [SAC](./sac)
+- [] TRPO
+- [] ACKTR
+- [] A2C
+- [] A3C
+- [] PPO
+- [] DRQN
+- [] QMIX
+- [] MAPPDG
+- [] MFMARL
 
 ## Contact us
 Email : [agentmaker@163.com]()

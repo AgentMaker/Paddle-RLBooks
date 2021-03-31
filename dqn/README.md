@@ -3,7 +3,7 @@
 Richly DQN code based on pure PaddlePaddle.
 
 ## Show
-![](../material/FlappyBird.gif)
+![](../material/FlappyBird.jpg)
 
 ## Codes
 - [DQN](./dqn)
