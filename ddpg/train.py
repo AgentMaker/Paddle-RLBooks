@@ -76,8 +76,10 @@ def train():
 
             # 指定的训练次数更新一次目标模型的参数
             if update_num % 200 == 0:
-                target_actor.load_dict(actor.state_dict())
-                target_critic.load_dict(critic.state_dict())
+                for target_param, param in zip(target_actor.parameters(), actor.parameters()):
+                    target_param.set_value(target_param * (1.0 - ratio) + param * ratio)
+                for target_param, param in zip(target_critic.parameters(), critic.parameters()):
+                    target_param.set_value(target_param * (1.0 - ratio) + param * ratio)
             update_num += 1
 
     return total_reward

@@ -12,7 +12,7 @@ policy_delay = 2
 learning_rate = 0.1
 gamma = 0.99
 ratio = 0.005
-exploration_noise = 1e-3
+exploration_noise = 0.1
 epoch = 0
 
 env = gym.make('Pendulum-v0')
@@ -54,6 +54,8 @@ def train():
     state = env.reset()
     while True:
         action = actor.select_action(state)
+        noisy = paddle.normal(0, exploration_noise, shape=[env.action_space.shape[0]]).clip(env.action_space.low, env.action_space.high)
+        action = (action + noisy).clip(env.action_space.low, env.action_space.high).numpy()
 
         next_state, reward, done, info = env.step(action)
         env.render()
@@ -67,8 +69,6 @@ def train():
         if len(rpm) > batch_size:
             # 获取训练数据
             batch_state, batch_action, batch_reward, batch_next_state, batch_done = rpm.sample(batch_size)
-            noisy = paddle.normal(0, exploration_noise, shape=[env.action_space.shape[0]]).clip(env.action_space.low, env.action_space.high)
-            batch_action = (batch_action + noisy).clip(env.action_space.low, env.action_space.high)
             # 计算损失函数
             best_v_1 = target_critic_1(batch_next_state, target_actor(batch_next_state))
             best_v_2 = target_critic_2(batch_next_state, target_actor(batch_next_state))
@@ -95,9 +95,12 @@ def train():
 
             # 指定的训练次数更新一次目标模型的参数
             if epoch % 200 == 0:
-                target_actor.load_dict(actor.state_dict())
-                target_critic_1.load_dict(critic_1.state_dict())
-                target_critic_2.load_dict(critic_2.state_dict())
+                for target_param, param in zip(target_actor.parameters(), actor.parameters()):
+                    target_param.set_value(target_param * (1.0 - ratio) + param * ratio)
+                for target_param, param in zip(target_critic_1.parameters(), critic_1.parameters()):
+                    target_param.set_value(target_param * (1.0 - ratio) + param * ratio)
+                for target_param, param in zip(target_critic_2.parameters(), critic_2.parameters()):
+                    target_param.set_value(target_param * (1.0 - ratio) + param * ratio)
             epoch += 1
 
     return total_reward
