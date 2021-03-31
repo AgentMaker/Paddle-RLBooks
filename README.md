@@ -3,7 +3,7 @@
 Welcome to Paddle-RLBooks which is a reinforcement learning code study guide based on pure PaddlePaddle.
 
 ## Show
-![](./material/FlappyBird.jpg)
+![](./material/flappybird.jpg)
 
 ## Codes
 - Release
