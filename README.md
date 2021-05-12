@@ -2,6 +2,8 @@
 
 Welcome to Paddle-RLBooks which is a reinforcement learning code study guide based on pure PaddlePaddle.
 
+欢迎来到Paddle-RLBooks，该仓库主要是针对强化学习中的一些算法进行整理，包括DQN、TD3、SAC等算法，并且每个都配备了游戏可直接一键运行，欢迎star~
+
 ## Show
 ![](./material/flappybird.jpg)
 
